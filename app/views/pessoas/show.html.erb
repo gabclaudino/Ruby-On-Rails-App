@@ -1,0 +1,59 @@
+<div class="pessoas-show-container">
+  <h1>Detalhes da Pessoa</h1>
+
+  <!-- Dados básicos -->
+  <p>
+    <strong>Nome:</strong>
+    <%= @pessoa.nome %>
+  </p>
+  <p>
+    <strong>Sobrenome:</strong>
+    <%= @pessoa.sobrenome %>
+  </p>
+
+  <!-- Documento 1×1 -->
+  <% if @pessoa.documento.present? %>
+    <p>
+      <strong>Documento nº:</strong>
+      <%= @pessoa.documento.numero %>
+    </p>
+  <% else %>
+    <p><em>Documento não cadastrado</em></p>
+  <% end %>
+
+  <!-- Endereços 1×N -->
+  <h2>Endereços</h2>
+  <% if @pessoa.enderecos.any? %>
+    <ul>
+      <% @pessoa.enderecos.each do |endereco| %>
+        <li>
+          <strong>Logradouro:</strong> <%= endereco.logradouro %><br>
+          <strong>Cidade:</strong> <%= endereco.cidade %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p><em>Sem endereços cadastrados</em></p>
+  <% end %>
+
+  <!-- Projetos Participantes N×N -->
+  <h2>Projetos</h2>
+  <% if @pessoa.projetos.any? %>
+    <ul>
+      <% @pessoa.projetos.each do |projeto| %>
+        <li><%= projeto.nome %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p><em>Sem participação em projetos</em></p>
+  <% end %>
+
+  <!-- Ações -->
+  <%= link_to 'Voltar à lista', pessoas_path, class: 'btn btn-outline-primary btn-sm' %>
+  <%= link_to 'Editar Pessoa', edit_pessoa_path(@pessoa), class: 'btn btn-outline-info btn-sm' if policy(@pessoa).update? %>
+  <%= button_to 'Excluir Pessoa', pessoa_path(@pessoa),
+              method: :delete,
+              data: { confirm: 'Tem certeza que deseja excluir esta pessoa?' },
+              class: 'btn btn-outline-danger btn-sm',
+              form: { class: 'd-inline' } if policy(@pessoa).destroy? %>
+</div>

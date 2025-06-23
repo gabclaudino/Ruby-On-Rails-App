@@ -1,0 +1,22 @@
+<!-- app/views/home/index.html.erb -->
+<div class="home-container">
+  <h1>Bem‑vindo ao Sistema de Gestão</h1>
+  <p>Use o menu abaixo para navegar pelo sistema:</p>
+
+  <div class="card-grid">
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+      <div class="card-body d-flex flex-column">
+        <h2 class="card-title">Pessoas</h2>
+        <p class="card-text">Gerencie cadastro e detalhes de pessoas.</p>
+        <%= link_to 'Ver Pessoas', pessoas_path, class: 'btn btn-secondary mt-auto' %>
+      </div>
+    </div>
+
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+      <div class="card-body d-flex flex-column">
+        <h2 class="card-title">Projetos</h2>
+        <p class="card-text">Listar e associar pessoas a projetos.</p>
+        <%= link_to 'Ver Projetos', projetos_path, class: 'btn btn-secondary mt-auto' %>
+      </div>
+    </div>
+</div>

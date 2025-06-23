@@ -1,0 +1,35 @@
+<!-- app/views/layouts/_navbar.html.erb -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>">
+      Sistema de Gestão
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <div class="navbar-nav me-auto">
+        <%= nav_link_to raw('<i class="bi bi-house-door"></i> Home'), root_path %>
+        <%= nav_link_to raw('<i class="bi bi-people-fill"></i> Pessoas'), pessoas_path %>
+        <%= nav_link_to raw('<i class="bi bi-journal-text"></i> Projetos'), projetos_path %>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <% if user_signed_in? %>
+          <%= button_to destroy_user_session_path,
+                        method: :delete,
+                        form: { class: 'd-inline' },
+                        data: { confirm: 'Tem certeza?' },
+                        class: 'nav-link btn btn-link' do %>
+            <i class="bi bi-box-arrow-right"></i> Logout
+          <% end %>
+        <% else %>
+          <%= link_to raw('<i class="bi bi-box-arrow-in-right"></i> Login'),
+                      new_user_session_path,
+                      class: 'nav-link' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

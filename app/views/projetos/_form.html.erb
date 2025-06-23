@@ -1,0 +1,50 @@
+<!-- app/views/projetos/_form.html.erb -->
+<%= form_with(model: @projeto, local: true, html: { class: 'mx-auto', style: 'max-width: 600px;' }) do |f| %>
+  <% if @projeto.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(@projeto.errors.count, 'erro') %> impediram o salvamento:</h4>
+      <ul>
+        <% @projeto.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card mb-4">
+    <div class="card-body">
+
+      <!-- Nome do Projeto -->
+      <div class="mb-3">
+        <%= f.label :nome, 'Nome do Projeto', class: 'form-label' %>
+        <%= f.text_field :nome, class: 'form-control', placeholder: 'Digite o nome do projeto' %>
+      </div>
+
+      <!-- Seleção de Participantes -->
+      <fieldset class="mb-3">
+        <legend class="form-label">Selecione Participantes</legend>
+        <div class="row">
+          <% Pessoa.all.each do |pessoa| %>
+            <div class="col-12 col-md-6">
+              <div class="form-check">
+                <%= check_box_tag 'projeto[pessoa_ids][]', pessoa.id,
+                      @projeto.pessoa_ids.include?(pessoa.id),
+                      id: "projeto_pessoa_#{pessoa.id}",
+                      class: 'form-check-input' %>
+                <%= label_tag "projeto_pessoa_#{pessoa.id}", pessoa.nome + ' ' + pessoa.sobrenome,
+                      class: 'form-check-label' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-between">
+      <%= link_to 'Cancelar', projetos_path, class: 'btn btn-outline-danger' %>
+        <%= f.submit(@projeto.new_record? ? 'Criar Projeto' : 'Atualizar Projeto',
+             class: 'btn btn-outline-success') %>
+      </div>
+    </div>
+  </div>
+<% end %>

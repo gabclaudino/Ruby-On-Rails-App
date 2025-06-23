@@ -1,0 +1,27 @@
+<%= form_with(model: participacao) do |form| %>
+  <% if participacao.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(participacao.errors.count, "error") %> prohibited this participacao from being saved:</h2>
+
+      <ul>
+        <% participacao.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :pessoa_id, style: "display: block" %>
+    <%= form.text_field :pessoa_id %>
+  </div>
+
+  <div>
+    <%= form.label :projeto_id, style: "display: block" %>
+    <%= form.text_field :projeto_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

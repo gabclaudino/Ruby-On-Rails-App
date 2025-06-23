@@ -1,0 +1,121 @@
+<!-- app/views/pessoas/_form.html.erb -->
+<% if @pessoa.errors.any? %>
+  <div class="errors">
+    <h2><%= pluralize(@pessoa.errors.count, "erro") %> impediram o salvamento:</h2>
+    <ul>
+      <% @pessoa.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_with(model: @pessoa, local: true) do |f| %>
+  <% if @pessoa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pessoa.errors.count, "erro") %> proibiu este registro de ser salvo:</h2>
+      <ul>
+        <% @pessoa.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="pessoa-form-container"> 
+    <!-- Campos de Pessoa -->
+    <div class="nome-sobrenome-box">
+      <!-- Nome -->
+      <div class="mb-3">
+        <%= f.label :nome, "Nome", class: "form-label mt-2" %>
+        <%= f.text_field :nome,
+              class: "form-control",
+              id: "pessoa_nome" %>
+      </div>
+
+      <!-- Sobrenome -->
+      <div class="mb-3">
+        <%= f.label :sobrenome, "Sobrenome", class: "form-label mt-2" %>
+        <%= f.text_field :sobrenome,
+              class: "form-control",
+              id: "pessoa_sobrenome" %>
+    </div>
+
+    <!-- Documento 1×1 -->
+    <div class="documento-box">
+      <fieldset class="mb-3">
+        <h2 class="form-label mt-4">Documento</h2>
+          <div class="mb-3">
+            <%= f.fields_for :documento_attributes, @pessoa.documento do |d| %>
+              <%= d.hidden_field :id %>
+
+              <%= d.label :numero, "Nº do Documento", class: "form-label" %>
+              <%= d.text_field :numero,
+                    class: "form-control",
+                    id: "pessoa_documento_numero" %>
+            <% end %>
+          </div>
+      </fieldset>
+    </div>
+
+
+
+    <!-- Endereços 1×N -->
+    <div class="endereco-box">
+      <fieldset class="mb-3">
+        <h2 class="form-label mt-4">Endereços</h2>
+
+        <!-- Container onde ficam os campos existentes -->
+        <div id="enderecos-container">
+          <%= f.fields_for :enderecos do |endereco_form| %>
+            <%= render 'endereco_fields', f: endereco_form %>
+          <% end %>
+        </div>
+
+        <!-- template oculto para clonar dinamicamente -->
+        <div id="endereco-template" style="display: none;">
+          <%= f.fields_for :enderecos, Endereco.new, child_index: "NEW_RECORD" do |endereco_form| %>
+            <%= render 'endereco_fields', f: endereco_form %>
+          <% end %>
+        </div>
+
+        <!-- link para adicionar -->
+        <%= link_to 'Adicionar outro endereço', '#', id: 'add-endereco', class: 'btn btn-outline-primary' %>
+      </fieldset>
+    </div>
+
+
+
+
+    <!-- Projetos Participantes N×N -->
+    <div class="projetos-box">
+      <fieldset class="mb-3">
+        <h2 class="form-label mt-4">Projetos Participantes</h2>
+
+        <div class="row">
+          <% Projeto.all.each do |projeto| %>
+            <div class="col-12 col-md-6">
+              <div class="form-check mb-2">
+                <%= check_box_tag "pessoa[projeto_ids][]", projeto.id,
+                      @pessoa.projeto_ids.include?(projeto.id),
+                      id: "pessoa_projeto_#{projeto.id}",
+                      class: "form-check-input" %>
+                <%= label_tag "pessoa_projeto_#{projeto.id}", projeto.nome,
+                      class: "form-check-label" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </fieldset>
+
+      <div class="actions mt-4 d-flex">
+        <%= link_to "Voltar para Pessoas", pessoas_path, class: "btn btn-primary btn-sm" %>
+        <%= f.submit "Salvar Pessoa", class: "btn btn-success btn-sm ms-2" %>
+      </div>
+    </div>
+
+
+
+<% end %>

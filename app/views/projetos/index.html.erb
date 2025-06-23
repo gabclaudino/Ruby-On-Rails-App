@@ -1,0 +1,21 @@
+<% content_for :title, "Projetos" %>
+
+<h1 class="text-center mb-4 mt-4">Projetos</h1>
+
+<div id="projetos" class="d-flex flex-wrap gap-4 justify-content-center">
+  <% @projetos.each do |projeto| %>
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title"><%= projeto.nome %></h5>
+        <p class="card-text">Participantes: <%= projeto.pessoas.count %></p>
+        <%= link_to 'Ver', projeto_path(projeto), class: 'btn btn-secondary mt-auto' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if policy(Projeto).create? %>
+  <div class="mt-4 text-center">
+    <%= link_to 'Novo Projeto', new_projeto_path, class: 'btn btn-outline-primary' %>
+  </div>
+<% end %>

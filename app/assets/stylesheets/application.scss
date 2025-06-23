@@ -1,0 +1,77 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* app/assets/stylesheets/application.scss */
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link {
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: 0.3s;
+  border-radius: 5px;
+
+}
+
+.nav-link:hover {
+  background-color: rgba(179, 179, 179, 0.461);
+}
+
+.home-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.card-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.card-grid h2 {
+  margin-top: 10px;
+}
+
+.pessoas-show-container {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.pessoa-form-container {
+  margin-left: 24px;
+  max-width: 20%;
+}

@@ -1,0 +1,17 @@
+<div class="nested-fields">
+  <%= f.hidden_field :id %>
+
+  <div class="mb-3">
+    <%= f.label :logradouro, "Logradouro", class: "form-label" %>
+    <%= f.text_field :logradouro, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :cidade, "Cidade", class: "form-label" %>
+    <%= f.text_field :cidade, class: "form-control" %>
+  </div>
+
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remover endereço", "#", class: "btn btn-sm btn-danger remove-endereco" %>
+  <hr>
+</div>
