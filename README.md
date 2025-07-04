@@ -1,24 +1,34 @@
-# README
+O projeto consiste em uma aplicação Rails para gerenciar Pessoas, seus Documentos, Endereços e Projetos com:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+    CRUD completo (Create, Read, Update, Delete)
 
-Things you may want to cover:
+    Relacionamentos 1×1 (Pessoa–Documento), 1×N (Pessoa–Endereços) e N×N (Pessoas–Projetos)
 
-* Ruby version
+    Autenticação (Devise) com dois perfis de usuário:
 
-* System dependencies
+        Admin: pode criar, editar e excluir registros
+            email: admin@exemplo.com
+            senha: senha123
 
-* Configuration
+        Usuário comum: só visualiza registros
+            email: teste1@exemplo.com
+            senha: 123456
+            (Podem ser cadastrados novos usuários)
 
-* Database creation
+Forma de executar:
 
-* Database initialization
+    > rails s
 
-* How to run the test suite
+Uso de JavaScript:
 
-* Services (job queues, cache servers, search engines, etc.)
+    Formulário de Endereços Dinâmico
 
-* Deployment instructions
+        #add-endereco clona um template oculto e insere novos blocos
 
-* ...
+        .remove-endereco marca _destroy e esconde/remova campos
+
+    Validação de Login
+
+        Script adiciona classes was-validated em formulários com needs-validation (Bootstrap)
+
+    Navbar toogler
