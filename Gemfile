@@ -56,7 +56,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'activerecord', '~> 7.0'
+gem 'activerecord', '~> 7.2'
 gem 'require_all'
 gem 'devise', '~> 4.9'
 gem 'pundit'
